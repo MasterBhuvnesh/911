@@ -38,4 +38,3 @@ This is a basic HTML form that submits data to a Google Form using JavaScript `f
 - JavaScript
 - Google Forms (as backend)
 - Tailwind CSS (You will replace normal CSS with this)
-```
