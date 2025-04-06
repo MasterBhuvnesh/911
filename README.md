@@ -1,4 +1,3 @@
-```markdown
 # Simple Form Submission (Google Form Integration)
 
 This is a basic HTML form that submits data to a Google Form using JavaScript `fetch`. It shows a success message after submission.
