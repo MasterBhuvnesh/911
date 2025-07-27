@@ -1,6 +1,6 @@
 {
   "name": "backend",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Bun.js, TypeScript, and Express server for JS method data",
   "main": "dist/index.js",
   "type": "module",
