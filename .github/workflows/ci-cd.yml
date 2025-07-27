@@ -1,0 +1,46 @@
+# .github/workflows/ci-cd.yml
+
+name: Build and Deploy on Tag
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' # Trigger on tags like v1.0.0, v2.1.5, etc.
+
+jobs:
+  build-and-print:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest # Or specify a version like '1.1.x'
+
+    - name: Navigate to backend directory
+      run: cd BACKEND
+
+    - name: Install dependencies
+      run: bun install
+      working-directory: BACKEND # Ensure commands run in the BACKEND directory
+
+    - name: Build TypeScript project
+      run: bun run build
+      working-directory: BACKEND # Ensure commands run in the BACKEND directory
+
+    - name: Get Tag Version
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+    - name: Print Version and Commit Hash
+      run: |
+        echo "--- CI/CD Information ---"
+        echo "Version: ${{ steps.get_version.outputs.VERSION }}"
+        echo "Commit Hash: ${{ github.sha }}"
+        echo "-------------------------"
+        echo "Build successful for tag: ${{ steps.get_version.outputs.VERSION }}"
+        echo "Artifacts are ready in BACKEND/dist/"
+
